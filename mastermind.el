@@ -58,6 +58,7 @@
   (interactive)
   (let ( (solution (mapconcat #'identity (mm/generate-list mm/puzzle-size mm/color-pegs) ""))
 	 (count 1))
+    (switch-to-buffer "*mastermind*")
     (insert "\n--------\n")
     (while (not (mm/play-round solution))
       (setq count (+ count 1)))
