@@ -50,7 +50,7 @@
   "Play a game of Mastermind."
   (let ( (solution (mapconcat #'identity (mm/generate-list mm/puzzle-size mm/color-pegs) ""))
 	 (count 1))
-    (insert "\nSolution: " solution "\n\n")
+    (insert "\n--------\n")
     (while (not (mm/play-round solution))
       (setq count (+ count 1)))
     (insert "Found a solution with " (number-to-string count) " tries.\n")))
