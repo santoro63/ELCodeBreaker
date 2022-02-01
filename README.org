@@ -1,14 +1,15 @@
-* Mastermind in Emacs-Lisp
+* Code Breaker in Emacs-Lisp
 
-An implementation of the Mastermind game written in Emacs Lisp.
+An implementation of the Code Breaker game in Emacs Lisp.
+
 
 * Install and Play
 
 #+begin_src emacs-lisp
-(load "path/to/mastermind.el")
-(mm/play-game)
+(load "path/to/codebreaker.el")
+(cb/play-game)
 #+end_src
 
-Run the above from inside Emacs scratch and you should be able to play the game.
+Run the above from inside Emacs and have fun.
 
 
