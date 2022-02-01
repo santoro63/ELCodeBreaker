@@ -1,0 +1,14 @@
+* Mastermind in Emacs-Lisp
+
+An implementation of the Mastermind game written in Emacs Lisp.
+
+* Install and Play
+
+#+begin_src emacs-lisp
+(load "path/to/mastermind.el")
+(mm/play-game)
+#+end_src
+
+Run the above from inside Emacs scratch and you should be able to play the game.
+
+
