@@ -8,6 +8,13 @@
 (defun mm/zip (ar1 ar2)
   (mapcar* #'cons ar1 ar2))
 
+;; I need this function because emacs-lisp `remove` removes all copies of member
+(defun mm/remove (member l)
+  "Return a copy of L where one instance of MEMBER has been removed."
+  (cond ( (not l) '())
+	( (equal member (car l)) (cdr l))
+	( t (cons (car l) (mm/remove member (cdr l))))))
+
 (defun mm/cons-match (c)
   "Return true if the two parts of the cons cell C are equal."
   (equal (car c) (cdr c)))
@@ -31,7 +38,7 @@
 (defun mm/count-xx (l1 l2)
   "Helper counting function for counting whites."
   (cond ( (not l1) 0)
-	( (member (car l1) l2) (+ 1 (mm/count-xx (cdr l1) (remove (car l1) l2))))
+	( (member (car l1) l2) (+ 1 (mm/count-xx (cdr l1) (mm/remove (car l1) l2))))
 	( t (mm/count-xx (cdr l1) l2))))
 
 
@@ -48,6 +55,7 @@
 
 (defun mm/play-game ()
   "Play a game of Mastermind."
+  (interactive)
   (let ( (solution (mapconcat #'identity (mm/generate-list mm/puzzle-size mm/color-pegs) ""))
 	 (count 1))
     (insert "\n--------\n")
