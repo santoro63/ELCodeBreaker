@@ -12,4 +12,17 @@ An implementation of the Code Breaker game in Emacs Lisp.
 
 Run the above from inside Emacs and have fun.
 
+* Playing the Game
 
+When you run =cb/play-game=,  Emacs will open (or switch to) the code breaker buffer and await your input.
+You then enter a guess consisting of four letters representing one of the following colored pegs: (R)ed, (B)lue, (G)reen, (Y)ellow, (W)hite and (P)urple.
+Emacs will print your guess followed by two numbers.
+The first number indicates the number of pegs of the correct color and position;
+the second number indicates  number of pegs of correct color but wrong position.
+It then waits for your next input.
+The game exits when you guess correctly, showing how many tries it took to break the code.
+
+
+* Technicalia
+
+Design notes can be found [[docs/design.org][here]].
