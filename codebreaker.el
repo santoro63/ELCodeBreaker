@@ -54,7 +54,7 @@ Good luck!
 
   (defun cb/input ()
   "Waits for user to input guess and return it as list of chars"
-  (let ( (input (read-string ": ")))
+  (let ( (input (upcase (read-string "Guess[WPBYRG]: "))))
     (cdr (split-string input ""))))
 
 (defun cb/play-round (solution)
