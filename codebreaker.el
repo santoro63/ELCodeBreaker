@@ -3,7 +3,22 @@
 ;; some constants
 (setq cb/color-pegs '( ("R" . "red") ("G" . "green") ("Y" . "yellow") ("B" . "cyan") ("W" . "white") ("P" . "violet")))
 (setq cb/puzzle-size 4)
-      
+
+(setq cb/HEADER "
+                       +-+-+-+-+-+-+-+-+-+-+-+
+                       |c|0|d|e|8|r|3|a|k|e|r|
+                       +-+-+-+-+-+-+-+-+-+-+-+ 
+                       
+Welcome to c0de8r3aker, the game where you try to guess the hidden code,
+consisting of four pegs colored (R)ed, (G)reen, (Y)ellow, (B)lue, (P)urple
+or (W)hite. Enter any combination of the letters RGYBPW and the game will 
+tell you how many you guessed correctly, and how many you got the color right
+but the position wrong.
+
+Good luck!
+"
+      )
+
 ;; I need this function because emacs-lisp `remove` removes all copies of member
 (defun cb/remove (member l)
   "Return a copy of L where one instance of MEMBER has been removed."
@@ -58,9 +73,10 @@
 	 (count 1))
     (switch-to-buffer "*c0de8r3aker*")
     (erase-buffer)
+    (insert cb/HEADER)
     (insert "\n--------\n")
     (while (not (cb/play-round solution))
       (setq count (+ count 1)))
-    (insert "Found a solution with " (number-to-string count) " tries.\n")))
+    (insert "\nCongratulations! You found a solution in " (number-to-string count) " tries.\n")))
 
 
