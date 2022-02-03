@@ -1,0 +1,17 @@
+#+title: Design Notes
+#+author: santoro63
+
+* Requirements
+
++ pure emacs, using the =dash= package.
+
+
+
+* Build and Test
+
+Nothing to build, but if you want to run the unit tests, =make tests= is your friend.
+
+* Notes
+
++ Guesses and solutions are represented as lists of strings
+  
