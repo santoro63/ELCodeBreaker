@@ -1,7 +1,7 @@
 (require 'dash)
 
 ;; some constants
-(setq cb/color-pegs '("R" "G" "Y" "B" "W" "P"))
+(setq cb/color-pegs '( ("R" . "red") ("G" . "green") ("Y" . "yellow") ("B" . "cyan") ("W" . "white") ("P" . "violet")))
 (setq cb/puzzle-size 4)
       
 ;; I need this function because emacs-lisp `remove` removes all copies of member
@@ -14,7 +14,7 @@
 (defun cb/generate-list (size candidates)
   "Generate a list of size SIZE from elements in CANDIDATES."
   (if (equal 0 size) '()
-    (cons (seq-random-elt candidates) (cb/generate-list (- size 1) candidates))))
+    (cons (car (seq-random-elt candidates)) (cb/generate-list (- size 1) candidates))))
 
 (defun cb/count-white-r (gl-short sl-short)
   (let ( (first (car gl-short))
@@ -46,7 +46,9 @@
   "Play one round of the game given SOLUTION and returns t if the puzzle has been solved."
   (let* ( (guess (cb/input))
 	  (pegs (cb/count-pegs guess solution)))
-    (insert (string-join guess "") " .... " (number-to-string (car pegs)) "." (number-to-string (cdr pegs)) "\n")
+    (dolist (el guess)
+      (insert (propertize el 'font-lock-face (list :foreground (cdr (assoc el cb/color-pegs))))))
+    (insert " .... " (number-to-string (car pegs)) "." (number-to-string (cdr pegs)) "\n")
     (= 4 (car pegs))))
 
 (defun cb/play-game ()
