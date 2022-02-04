@@ -4,6 +4,8 @@
 (setq cb/color-pegs '( ("R" . "red") ("G" . "green") ("Y" . "yellow") ("B" . "cyan") ("W" . "white") ("P" . "violet")))
 (setq cb/puzzle-size 4)
 
+(setq cb/input-re "^[RWYGBP]\\{4\\}$")
+
 (setq cb/HEADER "
                        +-+-+-+-+-+-+-+-+-+-+-+
                        |c|0|d|e|8|r|3|a|k|e|r|
@@ -52,9 +54,21 @@ Good luck!
 	  (setq sol-extra (cons (nth n solution) sol-extra)))))
     (cons matches (cb/count-white-r guess-extra sol-extra))))
 
-  (defun cb/input ()
+(defun cb/valid-input-p (input)
+  "Return nil if INPUT is not valid."
+  (string-match cb/input-re input))
+
+(defun cb/prompt-guess ()
+  "Prompt user for a guess and return guess as string"
+  (upcase (read-string "Guess[WPYBYRG]: ")))
+  
+(defun cb/input ()
   "Waits for user to input guess and return it as list of chars"
-  (let ( (input (upcase (read-string "Guess[WPBYRG]: "))))
+  (let ( (input (cb/prompt-guess) ))
+    (while (not (cb/valid-input-p input))
+      (message "Invalid input. Must be a 4-character string of R,W,G,B,P or Y")
+      (sleep-for 2)
+      (setq input (cb/prompt-guess)))
     (cdr (split-string input ""))))
 
 (defun cb/play-round (solution)
